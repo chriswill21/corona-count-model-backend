@@ -22,7 +22,10 @@ app = Flask(__name__)
 
 @app.route("/")
 def evaluate_sentiment():
-    comment = [request.args.get('comment')]
+    comment = [request.args.get('comment')].copy()
+    print(comment)
+    results = run(comment)
+    print(results)
     return "<h1>" + comment[0] + "</h1>"
 
 
@@ -66,17 +69,17 @@ def run(comment):
         scores.append(t_score)
         print(t_score)
 
-    with open(OUTPUT_PATH, 'w') as csvfile:
-        writer = csv.writer(csvfile, delimiter=',', lineterminator='\n')
-        writer.writerow(['Text', 'Top5%',
-                         'Emoji_1', 'Emoji_2', 'Emoji_3', 'Emoji_4', 'Emoji_5',
-                         'Pct_1',
-                         'Pct_2',
-                         'Pct_3',
-                         'Pct_4',
-                         'Pct_5'.encode()])
-        for i, row in enumerate(scores):
-            try:
-                writer.writerow(row)
-            except Exception:
-                print("Exception at row {}!".format(i))
+    # with open(OUTPUT_PATH, 'w') as csvfile:
+    #     writer = csv.writer(csvfile, delimiter=',', lineterminator='\n')
+    #     writer.writerow(['Text', 'Top5%',
+    #                      'Emoji_1', 'Emoji_2', 'Emoji_3', 'Emoji_4', 'Emoji_5',
+    #                      'Pct_1',
+    #                      'Pct_2',
+    #                      'Pct_3',
+    #                      'Pct_4',
+    #                      'Pct_5'.encode()])
+    #     for i, row in enumerate(scores):
+    #         try:
+    #             writer.writerow(row)
+    #         except Exception:
+    #             print("Exception at row {}!".format(i))
