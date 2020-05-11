@@ -25,8 +25,9 @@ def evaluate_sentiment():
     comment = [request.args.get('comment')].copy()
     print(comment)
     results = run(comment)
+    results = [str(emoji) for emoji in results]
     print(results)
-    return "<h1>" + comment[0] + "</h1>"
+    return "<h1>" + ', '.join(results) + "</h1>"
 
 
 OUTPUT_PATH = 'test_sentences.csv'
@@ -65,9 +66,11 @@ def run(comment):
         ind_top = top_elements(t_prob, 5)
         t_score.append(sum(t_prob[ind_top]))
         t_score.extend(ind_top)
-        t_score.extend([t_prob[ind] for ind in ind_top])
+        t_score.extend([str(t_prob[ind]) for ind in ind_top])
         scores.append(t_score)
         print(t_score)
+
+    return scores[0][2:7]
 
     # with open(OUTPUT_PATH, 'w') as csvfile:
     #     writer = csv.writer(csvfile, delimiter=',', lineterminator='\n')
