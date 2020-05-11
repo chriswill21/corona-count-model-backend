@@ -1,4 +1,6 @@
 *.pb filter=lfs diff=lfs merge=lfs -text
+*.dylib filter=lfs diff=lfs merge=lfs -text
+*.so filter=lfs diff=lfs merge=lfs -text
 corona_count_env/lib/python3.6/site-packages/numpy/.dylibs/libopenblasp-r0.3.7.dylib filter=lfs diff=lfs merge=lfs -text
 corona_count_env/lib/python3.6/site-packages/tensorflow/lite/python/optimize/_tensorflow_lite_wrap_calibration_wrapper.so filter=lfs diff=lfs merge=lfs -text
 corona_count_env/lib/python3.6/site-packages/scipy/.dylibs/libopenblasp-r0.3.7.dylib filter=lfs diff=lfs merge=lfs -text
